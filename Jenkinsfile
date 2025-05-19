@@ -60,9 +60,6 @@ pipeline {
                 expression { env.DEPLOY_ENV != 'none' }
             }
             steps {
-                sh 'chmod +x ./deploy-utils.sh'
-                sh './deploy-utils.sh install_node_and_pm2'
-
                 sh 'rm -rf node_modules'
                 sh 'npm ci'
                 sh 'npm run build'
