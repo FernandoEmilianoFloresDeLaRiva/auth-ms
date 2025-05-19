@@ -13,7 +13,7 @@ import { envsValues } from './common/config/get-envs-values';
       username: envsValues.DB_USERNAME,
       password: envsValues.DB_PASSWORD,
       database: envsValues.DB_NAME,
-      entities: [__dirname + '/auth/infraestructure/**/*.entity{.ts,.js}'],
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
       logging: true,
     }),
