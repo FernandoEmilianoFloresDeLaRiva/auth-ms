@@ -30,12 +30,12 @@ pipeline {
                             break
                         case 'dev':
                             env.DEPLOY_ENV = 'development'
-                            env.EC2_IP = ''
+                            env.EC2_IP = '44.205.201.108'
                             env.NODE_ENV = 'development'
                             break
                         case 'qa':
                             env.DEPLOY_ENV = 'qa'
-                            env.EC2_IP = ''
+                            env.EC2_IP = '3.227.65.63'
                             env.NODE_ENV = 'qa'
                             break
                         default:
