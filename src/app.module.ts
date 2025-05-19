@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { HealthController } from './common/health/health.controller';
 import { AuthModule } from './auth/infraestructure/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { envsValues } from './common/config/get-envs-values';
@@ -19,6 +18,5 @@ import { envsValues } from './common/config/get-envs-values';
     }),
     AuthModule,
   ],
-  controllers: [HealthController],
 })
 export class AppModule {}
