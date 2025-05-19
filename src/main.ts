@@ -1,11 +1,19 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Logger, ValidationPipe } from '@nestjs/common';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
   const logger = new Logger('Auth MS');
-  const app = await NestFactory.create(AppModule);
-  app.enableCors();
+  const app = await NestFactory.createMicroservice<MicroserviceOptions>(
+    AppModule,
+    {
+      transport: Transport.TCP,
+      options: {
+        port : 3000
+      },
+    },
+  );
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -13,7 +21,8 @@ async function bootstrap() {
       transform: true,
     }),
   );
-  await app.listen(3000);
-  logger.log(`Auth MS is running on: ${app.getUrl()}`);
+  await app.listen();
+  logger.log(`Auth MS is running on port: ${process.env.TCP_PORT}`);
 }
+
 bootstrap();
