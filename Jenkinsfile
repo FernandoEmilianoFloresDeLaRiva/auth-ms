@@ -5,6 +5,7 @@ pipeline {
         APP_NAME = 'auth-ms'
         REPO_URL = 'https://github.com/FernandoEmilianoFloresDeLaRiva/auth-ms'
         SSH_CRED_ID = 'ssh-key-ec2'
+        SSH_CRED_ID_MONOCOTO = 'ssh-key-ec2-monocoto'
         EC2_USER = 'ubuntu'
         REMOTE_PATH = '/home/ubuntu/auth-ms'
     }
@@ -73,14 +74,14 @@ pipeline {
             steps {
                 script {
                     def envSuffix = env.DEPLOY_ENV
-                    def sshKeyId = "ssh-key-ec2"
+                    def sshKeyId = (envSuffix == 'production') ? SSH_CRED_ID : ((envSuffix == 'development' || envSuffix == 'qa') ? SSH_CRED_ID_MONOCOTO : SSH_CRED_ID)
                     def dbHostId = "db-host-${envSuffix}"
                     def dbUserId = "db-user-${envSuffix}"
                     def dbPassId = "db-pass-${envSuffix}"
                     def dbNameId = "db-name-${envSuffix}"
 
                     withCredentials([
-                        sshUserPrivateKey(credentialsId: SSH_CRED_ID, keyFileVariable: 'SSH_KEY'),
+                        sshUserPrivateKey(credentialsId: sshKeyId, keyFileVariable: 'SSH_KEY'),
                         string(credentialsId: dbHostId, variable: 'DB_HOST'),
                         string(credentialsId: dbUserId, variable: 'DB_USER'),
                         string(credentialsId: dbPassId, variable: 'DB_PASS'),
