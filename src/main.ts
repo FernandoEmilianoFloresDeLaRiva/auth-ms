@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { envsValues } from './common/config/get-envs-values';
 
 async function bootstrap() {
   const logger = new Logger('Auth MS');
@@ -10,7 +11,7 @@ async function bootstrap() {
     {
       transport: Transport.TCP,
       options: {
-        port : 3000
+        port: envsValues.PORT,
       },
     },
   );
@@ -22,7 +23,7 @@ async function bootstrap() {
     }),
   );
   await app.listen();
-  logger.log(`Auth MS is running on port: ${process.env.TCP_PORT}`);
+  logger.log(`Auth MS is running on port: ${envsValues.PORT}`);
 }
 
 bootstrap();
