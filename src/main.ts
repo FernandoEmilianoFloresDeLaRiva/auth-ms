@@ -5,7 +5,7 @@ import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { envsValues } from './common/config/get-envs-values';
 
 async function bootstrap() {
-  const logger = new Logger('Auth MS.');
+  const logger = new Logger('Auth MS');
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     AppModule,
     {
