@@ -25,7 +25,7 @@ async function bootstrap() {
   );
   await app.listen();
   logger.log(`Auth MS is running on port: ${envsValues.PORT}`);
-  logger.log('Auth ms is running on qa enviroment')
+  logger.log('Auth ms is running on dev enviroment')
 }
 
 bootstrap();
