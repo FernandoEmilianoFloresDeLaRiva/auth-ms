@@ -8,6 +8,14 @@ import { AuthService } from 'src/auth/services/auth.service';
 export class AuthController {
   constructor(@Inject(AuthService) private readonly authService: AuthService) {}
 
+  @MessagePattern({ cmd: 'auth.healthcheck' })
+  async healthCheck() {
+    return {
+      status: 'ok',
+      message: 'Auth service is running',
+    }
+  }
+
   @MessagePattern({ cmd: 'auth.register.user' })
   async registerUser(@Payload() registerDto: RegisterDTO) {
     return this.authService.registerUser(registerDto);
