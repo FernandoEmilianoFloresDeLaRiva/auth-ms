@@ -12,6 +12,11 @@ install_node_and_pm2() {
   if ! command -v pm2 >/dev/null 2>&1; then
     sudo npm install -g pm2
   fi
+
+  if ! command -v nest >/dev/null 2>&1; then
+    echo 'NestJS CLI no está instalado. Instalando...'
+    sudo npm install -g @nestjs/cli
+  fi
 }
 
 ensure_remote_path() {
